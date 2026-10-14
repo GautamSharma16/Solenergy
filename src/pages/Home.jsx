@@ -5,11 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   ArrowUpRight, 
   Phone, 
-  ShieldCheck, 
-  Award, 
   CheckCircle2, 
   ArrowUp,
-  Zap,
   ArrowRight
 } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
@@ -21,6 +18,10 @@ import { endToEndSolutions } from '../data/services';
 import whatsappIcon from '../assets/whatsapp.png';
 import solenergiStoryImage from '../assets/solenergi-story.svg';
 import orangeSunburstRing from '../assets/Orange Radial Sunburst Ring (1).png';
+import dippLogo from '../assets/DiPP Blue Swoosh Logo (1).png';
+import mnreLogo from '../assets/mnre (1).png';
+import pmSuryaGharLogo from '../assets/PM Surya Ghar Yojana Logo (1).png';
+import upnedaLogo from '../assets/UPNEDA.png';
 import './Home.css';
 
 export default function Home() {
@@ -62,7 +63,7 @@ export default function Home() {
       icon: "/images/atal_assets/lower-lcoe.svg"
     },
     {
-      title: "World’s largest Solar Tree manufacturer (11 KWp MOIL)",
+      title: "World's largest Solar Tree manufacturer (11 KWp MOIL)",
       icon: "/images/atal_assets/bis-certified.svg"
     },
     {
@@ -74,7 +75,7 @@ export default function Home() {
       icon: "/images/atal_assets/automated.svg"
     },
     {
-      title: "Hedging institutional electricity tariffs at ₹3.50–5.00/unit",
+      title: "Hedging institutional electricity tariffs at Rs. 3.50-5.00/unit",
       icon: "/images/atal_assets/topcon.svg"
     },
     {
@@ -353,17 +354,14 @@ export default function Home() {
               </h1>
 
               <p className="hero-subheadline">
-                Install high-efficiency solar architectures and claim up to <strong>₹1,08,000 PM Surya Ghar subsidy</strong> or <strong>40% accelerated tax depreciation</strong> — with easy EMIs and a free site visit.
+                Install high-efficiency solar architectures and claim up to <strong>&#8377;1,08,000 PM Surya Ghar subsidy</strong> or <strong>40% accelerated tax depreciation</strong> with easy EMIs and a free site visit.
               </p>
 
               {/* Trust Badges Row matching Screenshot 1 */}
               <div className="hero-trust-badges">
                 <div className="hero-badge-item">
                   <div className="hero-badge-icon">
-                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.2">
-                      <circle cx="12" cy="12" r="5"/>
-                      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-                    </svg>
+                    <img src={pmSuryaGharLogo} alt="" />
                   </div>
                   <div className="hero-badge-text">
                     <strong>PM Surya Ghar</strong>
@@ -373,7 +371,7 @@ export default function Home() {
 
                 <div className="hero-badge-item">
                   <div className="hero-badge-icon">
-                    <Award size={22} />
+                    <img src={mnreLogo} alt="" />
                   </div>
                   <div className="hero-badge-text">
                     <strong>MNRE</strong>
@@ -383,7 +381,7 @@ export default function Home() {
 
                 <div className="hero-badge-item">
                   <div className="hero-badge-icon">
-                    <ShieldCheck size={22} />
+                    <img src={upnedaLogo} alt="" />
                   </div>
                   <div className="hero-badge-text">
                     <strong>UPNEDA</strong>
@@ -393,7 +391,7 @@ export default function Home() {
 
                 <div className="hero-badge-item">
                   <div className="hero-badge-icon">
-                    <CheckCircle2 size={22} />
+                    <img src={dippLogo} alt="" />
                   </div>
                   <div className="hero-badge-text">
                     <strong>DIPP</strong>
@@ -402,10 +400,11 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Pill Highlight */}
-              <div className="hero-pill-highlight">
-                <Zap size={16} className="pill-lightning" />
-                <span>"Fastest Subsidy & Net-Metering Approval in UP & NCR"</span>
+              <div className="hero-approval-callout">
+                <div>
+                  <strong>Fast-track solar approvals</strong>
+                  <span>Subsidy and net-metering support across UP & NCR</span>
+                </div>
               </div>
             </div>
 
@@ -414,7 +413,7 @@ export default function Home() {
               <div className="hero-consultation-card">
                 <h3 className="consultation-card-title">Book a FREE Consultation</h3>
                 <p className="consultation-card-sub">
-                  Claim your <span className="subsidy-orange">₹1,08,000 subsidy</span> today.
+                  Claim your <span className="subsidy-orange">&#8377;1,08,000 subsidy</span> today.
                 </p>
 
                 <form onSubmit={handleConsultationSubmit} className="consultation-form">
@@ -466,11 +465,11 @@ export default function Home() {
                       className="form-select-field"
                     >
                       <option value="" disabled>Monthly Electricity Bill*</option>
-                      <option value="1500-3000">₹1,500 – ₹3,000 / month (1–2 kW)</option>
-                      <option value="3000-5000">₹3,000 – ₹5,000 / month (3–5 kW)</option>
-                      <option value="5000-10000">₹5,000 – ₹10,000 / month (5–10 kW)</option>
-                      <option value="10000-25000">₹10,000 – ₹25,000 / month (Commercial)</option>
-                      <option value="above25000">Above ₹25,000 / month (Industrial / HT)</option>
+                      <option value="1500-3000">&#8377;1,500 - &#8377;3,000 / month (1-2 kW)</option>
+                      <option value="3000-5000">&#8377;3,000 - &#8377;5,000 / month (3-5 kW)</option>
+                      <option value="5000-10000">&#8377;5,000 - &#8377;10,000 / month (5-10 kW)</option>
+                      <option value="10000-25000">&#8377;10,000 - &#8377;25,000 / month (Commercial)</option>
+                      <option value="above25000">Above &#8377;25,000 / month (Industrial / HT)</option>
                     </select>
                   </div>
 
@@ -750,7 +749,7 @@ export default function Home() {
                       aria-expanded={isOpen ? 'true' : 'false'}
                     >
                       <span className="faq-question-text">{faq.q}</span>
-                      <span className="faq-toggle-icon">{isOpen ? '−' : '+'}</span>
+                      <span className="faq-toggle-icon">{isOpen ? '-' : '+'}</span>
                     </button>
                     {isOpen && (
                       <div className="faq-answer-panel">
