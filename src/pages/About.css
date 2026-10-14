@@ -1,0 +1,196 @@
+.subpage-hero {
+  background: linear-gradient(135deg, var(--color-dark-navy) 0%, var(--color-dark-obsidian) 100%);
+  color: var(--color-white);
+  padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+  border-bottom: 1px solid var(--color-dark-border);
+}
+
+.subpage-hero-title {
+  color: var(--color-white);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 800;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.subpage-hero-sub {
+  color: rgba(245, 247, 250, 0.8);
+  font-size: 1.15rem;
+  max-width: 720px;
+}
+
+.about-intro-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+.about-intro-text p {
+  margin-bottom: 1.25rem;
+}
+
+.gov-recognition-banner {
+  background-color: var(--color-solar-blue-soft);
+  border: 1px solid rgba(48, 79, 125, 0.2);
+  border-radius: var(--border-radius-md);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.gov-seal-icon {
+  color: var(--color-primary-orange);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.gov-recognition-banner strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--color-dark-navy);
+  margin-bottom: 3px;
+}
+
+.gov-recognition-banner p {
+  font-size: 0.85rem;
+  color: var(--color-solar-blue);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.about-intro-media {
+  position: relative;
+}
+
+.about-img-box {
+  height: 420px;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.about-stats-tile {
+  position: absolute;
+  bottom: -20px;
+  left: 20px;
+  background-color: var(--color-primary-orange);
+  color: var(--color-white);
+  padding: 1.25rem 1.75rem;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-orange);
+}
+
+.stats-tile-num {
+  font-size: 2.25rem;
+  font-weight: 800;
+  display: block;
+  line-height: 1;
+}
+
+.stats-tile-lbl {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+  display: block;
+}
+
+/* Values Grid */
+.values-grid {
+  margin-top: 2rem;
+}
+
+.value-card {
+  background-color: var(--color-dark-card);
+  border: 1px solid var(--color-dark-border);
+  border-radius: var(--border-radius-md);
+  padding: 2rem;
+  position: relative;
+  transition: all var(--transition-smooth);
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-primary-orange);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.value-num {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--color-primary-orange);
+  margin-bottom: 1rem;
+}
+
+.value-title {
+  color: var(--color-white);
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.value-desc {
+  color: rgba(245, 247, 250, 0.75);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+/* Sublinks */
+.about-sublinks-grid {
+  margin-top: 2rem;
+}
+
+.sublink-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-light-border);
+  border-radius: var(--border-radius-md);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: all var(--transition-smooth);
+}
+
+.sublink-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-orange);
+}
+
+.sublink-icon {
+  color: var(--color-primary-orange);
+  margin-bottom: 1.25rem;
+}
+
+.sublink-card h4 {
+  font-size: 1.15rem;
+  color: var(--color-dark-navy);
+  margin-bottom: 0.5rem;
+}
+
+.sublink-card p {
+  font-size: 0.88rem;
+  color: var(--color-text-body);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.sublink-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-primary-orange);
+}
+
+@media (max-width: 992px) {
+  .about-intro-grid {
+    grid-template-columns: 1fr;
+  }
+}

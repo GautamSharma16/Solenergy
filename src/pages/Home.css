@@ -1,0 +1,1221 @@
+/* ==========================================================================
+   SOLENERGI RESEARCH - CINEMATIC VIDEO HERO & MOTION SYSTEM
+   ========================================================================== */
+
+/* ==========================================================================
+   Hero Section 0: Video Background + Floating Consultation Form (Screenshot 1)
+   ========================================================================== */
+.hero-video-section {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: clamp(84px, 10vh, 118px) 0 clamp(42px, 6vh, 72px) 0;
+  background-color: #0d1b2a;
+}
+
+.hero-video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-video-element {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.02);
+}
+
+.hero-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(14, 28, 45, 0.78) 0%,
+    rgba(23, 42, 66, 0.65) 45%,
+    rgba(14, 28, 45, 0.82) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-video-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.hero-video-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+/* Left Content Column */
+.hero-content-left {
+  color: #ffffff;
+}
+
+.hero-headline {
+  font-size: clamp(2.5rem, 4.2vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+
+.hero-highlight-text {
+  color: #E89A4B;
+  display: inline-block;
+  background: linear-gradient(90deg, #E89A4B 0%, #F5C928 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subheadline {
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+  line-height: 1.6;
+  color: rgba(245, 247, 250, 0.92);
+  margin-bottom: 2.25rem;
+  max-width: 580px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.hero-subheadline strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Trust Badges Row */
+.hero-trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.hero-badge-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.95rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.hero-badge-item:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(232, 154, 75, 0.5);
+}
+
+.hero-badge-icon {
+  color: #E89A4B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-badge-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.hero-badge-text strong {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.hero-badge-text span {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Pill Highlight */
+.hero-pill-highlight {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 50px;
+  background: rgba(23, 42, 66, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(232, 154, 75, 0.4);
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.pill-lightning {
+  color: #E89A4B;
+  font-size: 1rem;
+}
+
+/* Right Form Wrapper & Consultation Card */
+.hero-form-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-consultation-card {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border-radius: 26px;
+  padding: clamp(1.75rem, 3vw, 2.35rem);
+  box-shadow: 0 24px 65px rgba(0, 0, 0, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  position: relative;
+  animation: cardFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.consultation-card-title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #172a42;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.4rem;
+}
+
+.consultation-card-sub {
+  font-size: 0.92rem;
+  color: #4e6178;
+  margin-bottom: 1.5rem;
+}
+
+.subsidy-orange {
+  color: #E89A4B;
+  font-weight: 700;
+}
+
+.consultation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.form-group-field {
+  position: relative;
+  width: 100%;
+}
+
+.form-input-text,
+.form-select-field {
+  width: 100%;
+  height: 50px;
+  padding: 0 1.15rem;
+  border: 1.5px solid #e1e7ec;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: #172a42;
+  background-color: #fbfcfd;
+  transition: all 0.25s ease;
+  outline: none;
+  font-family: inherit;
+}
+
+.form-input-text:focus,
+.form-select-field:focus {
+  border-color: #E89A4B;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3.5px rgba(232, 154, 75, 0.15);
+}
+
+.phone-input-group {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #e1e7ec;
+  border-radius: 12px;
+  background-color: #fbfcfd;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.phone-input-group:focus-within {
+  border-color: #E89A4B;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3.5px rgba(232, 154, 75, 0.15);
+}
+
+.phone-prefix {
+  padding: 0 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #172a42;
+  border-right: 1.5px solid #e1e7ec;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  background-color: #f4f6f8;
+}
+
+.phone-input {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  height: 50px;
+}
+
+.consultation-btn-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.btn-consultation-submit {
+  flex: 1;
+  height: 52px;
+  background: #172a42;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-consultation-submit:hover {
+  background: #304f7d;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(23, 42, 66, 0.25);
+}
+
+.btn-consultation-call {
+  width: 52px;
+  height: 52px;
+  background: #172a42;
+  color: #ffffff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.btn-consultation-call:hover {
+  background: #E89A4B;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(232, 154, 75, 0.3);
+}
+
+.consultation-success-msg {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+
+/* ==========================================================================
+   Section 1: Intro Cards & Engineering Statement
+   ========================================================================== */
+.intro_cards_section {
+  padding: clamp(42px, 5vw, 68px) 0 clamp(30px, 4vw, 52px) 0;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.intro_two_col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+.home_atal_intro_two_image_area {
+  display: block;
+  position: relative;
+  height: clamp(460px, 48vw, 640px);
+  width: 100%;
+}
+
+.img-box {
+  cursor: pointer;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  position: absolute;
+  border-radius: 24px;
+  overflow: hidden;
+  padding: 14px;
+  background: #ffffff;
+  box-shadow: 0px 18px 45px rgba(23, 42, 66, 0.16);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 1px solid rgba(23, 42, 66, 0.08);
+  will-change: transform;
+}
+
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+
+.img-back {
+  top: 40px;
+  left: 0;
+  width: clamp(280px, 30vw, 420px);
+  height: clamp(380px, 42vw, 560px);
+  transform: rotate(-4deg);
+  z-index: 1;
+}
+
+.img-front {
+  top: 0;
+  left: clamp(80px, 10vw, 140px);
+  width: clamp(280px, 30vw, 420px);
+  height: clamp(380px, 42vw, 560px);
+  transform: rotate(7deg);
+  z-index: 2;
+}
+
+.img-box:hover {
+  box-shadow: 0px 24px 60px rgba(23, 42, 66, 0.24);
+  border-color: rgba(232, 154, 75, 0.3);
+}
+
+.home_atal_intro_content_area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.home_atal_intro_content_area h2 {
+  font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+  font-weight: 700;
+  color: #172a42;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.75rem;
+}
+
+.atal_info_h2_span {
+  color: var(--color-primary-orange, #E89A4B);
+  display: inline;
+}
+
+.home_atal_intro_content_area p {
+  font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+  color: #4e6178;
+  line-height: 1.68;
+  margin-bottom: 2.25rem;
+  max-width: 580px;
+}
+
+.atal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #172a42;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 6px;
+  width: fit-content;
+  transition: color 0.3s ease;
+}
+
+.atal-btn::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-primary-orange, #E89A4B);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease;
+  transform-origin: left;
+}
+
+.atal-btn:hover {
+  color: var(--color-primary-orange, #E89A4B);
+}
+
+.atal-btn:hover::after {
+  transform: scaleX(1.1);
+}
+
+.atal-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  color: var(--color-primary-orange, #E89A4B);
+}
+
+.atal-btn:hover .atal-icon {
+  transform: translate(3px, -3px);
+}
+
+
+/* ==========================================================================
+   Section 2: Grand Story Statement with solenergi-story.svg (Full Height + About Content)
+   ========================================================================== */
+.atal_story_image_area {
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  background-color: #F4F9EA;
+  min-height: 0;
+  height: clamp(470px, 42vw, 620px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  text-align: left;
+}
+
+.atal_story_skyline_bg {
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+.story_container {
+  position: relative;
+  z-index: 3;
+  max-width: none;
+  padding-left: clamp(1.25rem, 5vw, 5rem);
+  padding-right: clamp(1.25rem, 5vw, 5rem);
+}
+
+.atal_story_content {
+  position: relative;
+  max-width: none;
+  margin: 0;
+  padding: 0 0 clamp(64px, 8vw, 108px);
+}
+
+.story-eyebrow-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(102, 151, 64, 0.24);
+  padding: 0.42rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #315B2E;
+  letter-spacing: 0.07em;
+  margin-bottom: 1.1rem;
+}
+
+.story-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #74A84D;
+}
+
+.story-main-heading {
+  font-size: clamp(1.95rem, 2.9vw, 3rem);
+  font-weight: 700;
+  color: #202124;
+  line-height: 1.24;
+  letter-spacing: 0;
+  margin: 0;
+  max-width: 1180px;
+}
+
+.atal_story_content_span {
+  color: #202124;
+  font-weight: 800;
+}
+
+.story-lead-text {
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  color: #40533D;
+  line-height: 1.62;
+  max-width: 760px;
+  margin: 0 0 clamp(1.5rem, 3vw, 2.6rem) 0;
+}
+
+.story-lead-text strong {
+  color: #172a42;
+}
+
+.story-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.9rem, 2vw, 1.4rem);
+  max-width: 980px;
+  margin: 0 auto 1.5rem auto;
+}
+
+.story-stat-card {
+  min-height: 108px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 14px;
+  padding: 1rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  box-shadow: 0 16px 35px rgba(23, 42, 66, 0.11);
+  text-align: center;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.story-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: #E89A4B;
+}
+
+.story-stat-num {
+  font-size: clamp(1.75rem, 2.4vw, 2.25rem);
+  font-weight: 800;
+  color: #E89A4B;
+  display: block;
+  line-height: 1.1;
+}
+
+.story-stat-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #172a42;
+  margin-top: 0.4rem;
+  display: block;
+  line-height: 1.35;
+}
+
+.story-about-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.story-btn {
+  padding: 0.85rem 1.85rem;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.25s ease;
+}
+
+
+/* ==========================================================================
+   Section 3: Engineering Next Gen + Guaranteed Infinite Non-Blank Scroller
+   ========================================================================== */
+.tpt-80 {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding: 10px 0;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.usp_two_col {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+  min-height: clamp(560px, 70vh, 720px);
+}
+
+.atal_usp_content_details h2 {
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 700;
+  color: #172a42;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.atal_usp_content_details p {
+  font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+  color: #4e6178;
+  line-height: 1.65;
+  max-width: 520px;
+}
+
+/* Scroller Area - Infinite seamless ticker with wide padding so pills never clip */
+.atal_solar_usp_feature_area {
+  position: relative;
+  height: auto;
+  width: 100%;
+  max-width: 620px;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+}
+
+.usp_scroller_wrap {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-x: visible;
+  overflow-y: visible;
+  padding: 0 25px;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+@keyframes seamlessInfiniteVerticalScroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(-50% - 10px));
+  }
+}
+
+.continuous-scroll-track {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  animation: none;
+  will-change: auto;
+}
+
+/* SolEnergi Palette: Solar Orange to Navy Gradient */
+.atal_solar_usp_single_feature {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, #E89A4B 0%, #304F7D 100%);
+  width: clamp(330px, 36vw, 420px);
+  padding: 12px 28px 12px 14px;
+  border-radius: 500px;
+  gap: 14px;
+  flex-shrink: 0;
+  box-shadow: 0 10px 24px rgba(48, 79, 125, 0.22);
+  transition: box-shadow 0.25s ease;
+  user-select: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  will-change: transform;
+}
+
+.atal_solar_usp_single_feature:hover {
+  box-shadow: 0 14px 32px rgba(232, 154, 75, 0.35);
+}
+
+.atal_solar_usp_icon_area {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.atal_solar_usp_icon_area img,
+.atal_solar_usp_icon_area svg {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.atal_solar_usp_content_area p {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0;
+}
+
+
+/* ==========================================================================
+   Section 4: Pinned 3D Stacked Cards on Scroll (SolEnergi Colors)
+   ========================================================================== */
+.atal_cards_section {
+  position: relative;
+  min-height: 100vh;
+  background-color: #FFFBF5;
+  overflow: visible;
+  padding: clamp(12px, 1.8vw, 20px) 0;
+}
+
+.atal_pin_wrap {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  perspective: 1600px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Rotating Sun Petal Background */
+.atal_logo_at_center_pin_image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(86vw, 90vh, 980px);
+  height: min(86vw, 90vh, 980px);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.74;
+  border-radius: 50%;
+}
+
+.atal_logo_at_center_pin_image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 42px rgba(232, 154, 75, 0.24));
+}
+
+/* Individual Stacked Card */
+.atal_card {
+  position: absolute;
+  width: clamp(340px, 42vw, 540px);
+  height: clamp(400px, 46vw, 560px);
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  border-radius: 28px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  z-index: 2;
+  will-change: transform, opacity;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Card 1: Dark Navy */
+.atal_first_card {
+  background-color: #172A42;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.atal_first_card h2 {
+  color: #ffffff;
+}
+
+.atal_first_card p {
+  color: rgba(245, 247, 250, 0.85);
+}
+
+/* Card 2: Warm Amber / Gold (SolEnergi Primary) */
+.atal_second_card {
+  background-color: #FFE6C7;
+  color: #172A42;
+  border-color: rgba(232, 154, 75, 0.3);
+}
+
+.atal_second_card h2 {
+  color: #172A42;
+}
+
+.atal_second_card p {
+  color: #3f4e61;
+}
+
+/* Card 3: Sun Yellow Light (SolEnergi Secondary) */
+.atal_third_card {
+  background-color: #FFF2CC;
+  color: #172A42;
+  border-color: rgba(245, 201, 40, 0.35);
+}
+
+.atal_third_card h2 {
+  color: #172A42;
+}
+
+.atal_third_card p {
+  color: #3f4e61;
+}
+
+/* Card 4: Solar Blue Light (SolEnergi Corporate) */
+.atal_fourth_card {
+  background-color: #D6EDFE;
+  color: #172A42;
+  border-color: rgba(48, 79, 125, 0.25);
+}
+
+.atal_fourth_card h2 {
+  color: #172A42;
+}
+
+.atal_fourth_card p {
+  color: #3f4e61;
+}
+
+.atal_card_inside_image {
+  width: clamp(100px, 14vw, 150px);
+  height: clamp(100px, 14vw, 150px);
+  border-radius: 24px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  background-color: #ffffff;
+}
+
+.atal_card_inside_image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.atal_card h2 {
+  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  letter-spacing: -0.03em;
+}
+
+.atal_card p {
+  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+  line-height: 1.6;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+
+/* ==========================================================================
+   Section 5 & 6 & 7: Grid, FAQ, and Consultation
+   ========================================================================== */
+.faq-reference-section {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(56px, 7vw, 86px) 0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(67, 106, 158, 0.72) 0%, rgba(48, 79, 125, 0.5) 34%, rgba(14, 28, 45, 0.98) 78%),
+    linear-gradient(135deg, var(--color-dark-navy) 0%, var(--color-dark-obsidian) 100%);
+}
+
+.faq-reference-header {
+  text-align: center;
+  margin-bottom: clamp(2.6rem, 5vw, 4.8rem);
+}
+
+.faq-reference-header h2 {
+  color: #ffffff;
+  font-size: clamp(2rem, 3vw, 3.1rem);
+  font-weight: 600;
+  letter-spacing: 0;
+  margin-bottom: 0.75rem;
+}
+
+.faq-reference-header p {
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.faq-reference-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 1290px;
+  margin: 0 auto;
+}
+
+.faq-card {
+  background: rgba(21, 36, 56, 0.92);
+  border: 1px solid rgba(232, 154, 75, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.faq-card.active {
+  border-color: rgba(232, 154, 75, 0.45);
+  background: rgba(23, 42, 66, 0.98);
+}
+
+.faq-question-btn {
+  width: 100%;
+  min-height: 70px;
+  padding: 1.25rem clamp(1.25rem, 3vw, 2.6rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.45vw, 1.35rem);
+  color: #ffffff;
+  border: none;
+  background: none;
+  cursor: pointer;
+  gap: 1rem;
+}
+
+.faq-toggle-icon {
+  font-size: 1.35rem;
+  color: var(--color-primary-orange);
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+.faq-answer-panel {
+  padding: 0 clamp(1.25rem, 3vw, 2.6rem) 1.5rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.65;
+  font-size: 0.95rem;
+}
+
+.faq-answer-panel p {
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0;
+}
+
+/* Consultation Grid */
+.consultation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.consultation-perks {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.perk-item {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.perk-num {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--color-primary-orange);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: var(--color-primary-orange-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.perk-item strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--color-dark-navy);
+  margin-bottom: 0.25rem;
+}
+
+.perk-item p {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.consultation-office-callout {
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  background-color: #f8fafc;
+  border-radius: 14px;
+  border-left: 4px solid var(--color-primary-orange);
+}
+
+.callout-badge {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-primary-orange);
+  display: inline-block;
+  margin-bottom: 0.4rem;
+}
+
+.callout-addr {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-dark-navy);
+  margin-bottom: 0.5rem;
+}
+
+.callout-contact {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+
+/* ==========================================================================
+   Floating Widgets: WhatsApp & Back To Top
+   ========================================================================== */
+.floating-widgets-group {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  z-index: 1000;
+}
+
+.whatsapp-float-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.whatsapp-float-icon {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.whatsapp-float-btn:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: none;
+}
+
+.back-to-top-circle-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #172a42;
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(23, 42, 66, 0.25);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.back-to-top-circle-btn:hover {
+  background-color: #E89A4B;
+  transform: translateY(-2px);
+}
+
+
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .hero-video-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .hero-form-wrapper {
+    justify-content: center;
+  }
+  .hero-consultation-card {
+    max-width: 540px;
+  }
+  .intro_two_col {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .usp_two_col {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+  .faq-layout {
+    grid-template-columns: 1fr;
+  }
+  .consultation-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-video-section {
+    padding-top: 100px;
+    min-height: auto;
+  }
+  .hero-trust-badges {
+    gap: 0.65rem;
+  }
+  .hero-badge-item {
+    padding: 0.45rem 0.75rem;
+  }
+  .floating-widgets-group {
+    bottom: 1.25rem;
+    right: 1.25rem;
+  }
+}

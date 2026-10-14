@@ -1,0 +1,73 @@
+:root {
+  /* SolEnergi Official Brand Palette */
+  --color-primary-orange: #E89A4B;
+  --color-primary-orange-hover: #d68533;
+  --color-primary-orange-light: rgba(232, 154, 75, 0.12);
+  --color-sun-yellow: #F5C928;
+  --color-sun-yellow-light: rgba(245, 201, 40, 0.15);
+  --color-solar-blue: #304F7D;
+  --color-solar-blue-light: #436A9E;
+  --color-solar-blue-soft: rgba(48, 79, 125, 0.08);
+  --color-dark-navy: #172A42;
+  --color-dark-obsidian: #0e1c2d;
+  --color-dark-card: #152438;
+  --color-white: #FFFFFF;
+  --color-light-gray: #F5F7FA;
+  --color-light-border: #E5E9F0;
+  --color-dark-border: rgba(255, 255, 255, 0.1);
+  --color-dark-border-strong: rgba(255, 255, 255, 0.2);
+
+  /* Typography Colors */
+  --color-text-heading: #172A42;
+  --color-text-body: #4E6178;
+  --color-text-muted: #7A8CA3;
+  --color-text-light: #F5F7FA;
+  --color-text-white: #FFFFFF;
+
+  /* Typography Font Family - Mulish (matches Atal Solar reference) */
+  --font-family: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Atal Solar Typographic Scales & Pacing */
+  --font-hero: clamp(2.4rem, 5.5vw, 4.4rem);
+  --font-h1: clamp(2.2rem, 4.5vw, 3.6rem);
+  --font-h2: clamp(1.8rem, 3.5vw, 2.75rem);
+  --font-h3: clamp(1.4rem, 2.5vw, 2rem);
+  --font-h4: clamp(1.15rem, 1.8vw, 1.45rem);
+  --font-body-lg: 1.125rem;
+  --font-body: 1rem;
+  --font-small: 0.875rem;
+  --font-badge: 0.78rem;
+
+  --letter-spacing-tight: -0.03em;
+  --letter-spacing-heading: -0.025em;
+  --letter-spacing-caps: 0.14em;
+  --letter-spacing-caps-wide: 0.2em;
+
+  /* Shadows & Glassmorphism */
+  --shadow-sm: 0 2px 8px rgba(23, 42, 66, 0.04);
+  --shadow-md: 0 8px 24px rgba(23, 42, 66, 0.08);
+  --shadow-lg: 0 16px 40px rgba(23, 42, 66, 0.12);
+  --shadow-orange: 0 10px 30px rgba(232, 154, 75, 0.28);
+  --shadow-navy: 0 16px 48px rgba(23, 42, 66, 0.2);
+
+  --glass-bg: rgba(255, 255, 255, 0.82);
+  --glass-bg-dark: rgba(23, 42, 66, 0.92);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-border-dark: rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(14px);
+
+  /* Transitions */
+  --transition-fast: 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-smooth: 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-slow: 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-bounce: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Layout */
+  --container-max-width: 1360px;
+  --header-height: 84px;
+  --header-height-shrunk: 68px;
+  --border-radius-sm: 8px;
+  --border-radius-md: 14px;
+  --border-radius-lg: 22px;
+  --border-radius-pill: 9999px;
+}
