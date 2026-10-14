@@ -594,9 +594,8 @@ export default function Home() {
             <div className="atal_solar_usp_feature_area">
               <div className="usp_scroller_wrap" ref={scrollerWrapRef}>
                 <div className="atal_solar_usp_feature_showcase continuous-scroll-track">
-                  {/* Set 1 */}
-                  {uspFeatures.map((item, idx) => (
-                    <div key={`s1-${idx}`} className="atal_solar_usp_single_feature usp-pill-item">
+                  {[...uspFeatures, ...uspFeatures, ...uspFeatures].map((item, idx) => (
+                    <div key={`usp-${idx}`} className="atal_solar_usp_single_feature usp-pill-item">
                       <div className="atal_solar_usp_icon_area">
                         <img src={item.icon} alt="" width="26" height="26" />
                       </div>
@@ -675,9 +674,10 @@ export default function Home() {
       {/* Ticker Band */}
       <Ticker theme="light" />
 
-      {/* =========================================================================
+      {/*
+      =========================================================================
           SECTION 5: END-TO-END SOLUTIONS & FEATURES
-          ========================================================================= */}
+          =========================================================================
       <section className="section section-light">
         <div className="container">
           <SectionHeading 
@@ -699,10 +699,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+      */}
 
-      {/* =========================================================================
+      {/*
+      =========================================================================
           SECTION 6: VERIFIED LANDMARK PROJECTS (Northern Railway, GAIL, BPCL, MOIL)
-          ========================================================================= */}
+          =========================================================================
       <section className="section">
         <div className="container">
           <SectionHeading 
@@ -724,6 +726,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      */}
 
       {/* =========================================================================
           SECTION 7: FREQUENTLY ASKED QUESTIONS

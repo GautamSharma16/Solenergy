@@ -696,10 +696,10 @@
 /* Scroller Area - Infinite seamless ticker with wide padding so pills never clip */
 .atal_solar_usp_feature_area {
   position: relative;
-  height: auto;
+  height: calc((74px * 7) + (20px * 6));
   width: 100%;
   max-width: 620px;
-  overflow: visible;
+  overflow: hidden;
   display: flex;
   justify-content: center;
 }
@@ -713,7 +713,7 @@
   justify-content: center;
   align-items: flex-start;
   overflow-x: visible;
-  overflow-y: visible;
+  overflow-y: hidden;
   padding: 0 25px;
   -webkit-mask-image: none;
   mask-image: none;
@@ -724,7 +724,7 @@
     transform: translateY(0);
   }
   100% {
-    transform: translateY(calc(-50% - 10px));
+    transform: translateY(calc(-33.333% - 13.333px));
   }
 }
 
@@ -733,8 +733,12 @@
   flex-direction: column;
   gap: 20px;
   align-items: center;
-  animation: none;
-  will-change: auto;
+  animation: seamlessInfiniteVerticalScroll 34s linear infinite;
+  will-change: transform;
+}
+
+.usp_scroller_wrap:hover .continuous-scroll-track {
+  animation-play-state: paused;
 }
 
 /* SolEnergi Palette: Solar Orange to Navy Gradient */
@@ -743,6 +747,7 @@
   align-items: center;
   background: linear-gradient(90deg, #E89A4B 0%, #304F7D 100%);
   width: clamp(330px, 36vw, 420px);
+  min-height: 74px;
   padding: 12px 28px 12px 14px;
   border-radius: 500px;
   gap: 14px;
