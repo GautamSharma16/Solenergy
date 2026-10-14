@@ -9,7 +9,8 @@ import {
   Award, 
   CheckCircle2, 
   ArrowUp,
-  Zap
+  Zap,
+  ArrowRight
 } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
 import Ticker from '../components/Ticker';
@@ -106,6 +107,37 @@ export default function Home() {
     {
       q: "5. How do I get a quote from SolEnergi?",
       a: "SolEnergi shares custom project feasibilities, structural drawings, and ROI models via call at 011-45402520, WhatsApp at +91 9310170907, or by email at sales@solenergi.in."
+    }
+  ];
+
+  const latestResources = [
+    {
+      category: "Blog",
+      title: "How Rooftop Solar Cuts Factory Power Bills Without Disrupting Operations",
+      date: "10 Oct, 2026",
+      isoDate: "2026-10-10",
+      image: "/images/atal_assets/atal-solar-n-type-topcon-panels-rooftop-installation.webp"
+    },
+    {
+      category: "Technology",
+      title: "TOPCon Solar Panels: Why Better Low-Light Yield Matters in Indian Cities",
+      date: "28 Sep, 2026",
+      isoDate: "2026-09-28",
+      image: "/images/atal_assets/product_photo.webp"
+    },
+    {
+      category: "Case Study",
+      title: "Designing High-Reliability Solar Systems for Railways and PSU Sites",
+      date: "14 Sep, 2026",
+      isoDate: "2026-09-14",
+      image: "/images/atal_assets/sustainable.webp"
+    },
+    {
+      category: "Policy",
+      title: "Accelerated Depreciation for Commercial Solar: What Businesses Should Know",
+      date: "30 Aug, 2026",
+      isoDate: "2026-08-30",
+      image: "/images/atal_assets/energy.webp"
     }
   ];
 
@@ -725,6 +757,48 @@ export default function Home() {
                   </div>
                 );
               })}
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 8: LATEST BLOG RESOURCES
+          ========================================================================= */}
+      <section className="latest-resources-section">
+        <div className="container">
+          <div className="latest-resources-header">
+            <h2>Latest From SolEnergi</h2>
+            <Link to="/news" className="latest-resources-view-all">
+              <span className="resource-btn-icon">
+                <ArrowRight size={18} />
+              </span>
+              <span>View All Resources</span>
+            </Link>
+          </div>
+
+          <div className="latest-resources-grid">
+            {latestResources.map((item) => (
+              <article className="latest-resource-card" key={item.title}>
+                <Link to="/news" className="latest-resource-image-link" aria-label={item.title}>
+                  <img src={item.image} alt={item.title} className="latest-resource-image" />
+                </Link>
+
+                <div className="latest-resource-body">
+                  <span className="latest-resource-category">{item.category}</span>
+                  <h3>
+                    <Link to="/news">{item.title}</Link>
+                  </h3>
+                  <time dateTime={item.isoDate}>{item.date}</time>
+
+                  <Link to="/news" className="latest-resource-read-more">
+                    <span className="resource-btn-icon">
+                      <ArrowRight size={17} />
+                    </span>
+                    <span>Read More</span>
+                  </Link>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
