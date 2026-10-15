@@ -335,6 +335,8 @@
 .header-mobile-toggle-wrap {
   position: relative;
   z-index: 2;
+  display: flex;
+  align-items: center;
 }
 
 .mobile-menu-toggle {
@@ -426,37 +428,6 @@
   padding: 0.35rem 0;
 }
 
-.mobile-nav-footer {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--color-light-border);
-}
-
-.mobile-contact-card {
-  background-color: var(--color-light-gray);
-  border-radius: var(--border-radius-md);
-  padding: 1.25rem;
-}
-
-.mobile-contact-title {
-  font-weight: 700;
-  color: var(--color-dark-navy);
-  font-size: 0.95rem;
-  margin-bottom: 0.25rem;
-}
-
-.mobile-contact-addr {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  margin-bottom: 1rem;
-  line-height: 1.4;
-}
-
-.mobile-contact-btns {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
 
 @media (max-width: 1080px) {
   .header-call-pill {

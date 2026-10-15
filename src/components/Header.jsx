@@ -209,12 +209,6 @@ export default function Header() {
             })}
           </ul>
 
-          <div className="mobile-nav-footer">
-            <Link to="/contact" className="btn btn-primary" onClick={() => setMobileMenuOpen(false)}>
-              <span>Contact Us</span>
-              <ArrowRight size={14} />
-            </Link>
-          </div>
         </div>
       </div>
     </header>
