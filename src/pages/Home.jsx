@@ -28,6 +28,11 @@ import solarStreetLightImage from '../assets/Solar Street Light Assembly (1).png
 import solarLanternImage from '../assets/Solar Camping Lantern with Solar Panel (1).png';
 import './Home.css';
 
+gsap.registerPlugin(ScrollTrigger);
+
+// Prevents pin jitter caused by the mobile browser address bar showing/hiding.
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 const productShowcase = [
   {
     slug: 'solar-tree',
@@ -100,7 +105,7 @@ export default function Home() {
     }, 4500);
   };
 
-  // Curved Pill features matching Screenshot 3 with SolEnergi credentials
+  // Curved pill features with SolEnergi credentials
   const uspFeatures = [
     {
       title: "PAN India portfolio in 20+ states across India",
@@ -248,7 +253,7 @@ export default function Home() {
     gsap.ticker.add(mouseTicker);
 
     // -------------------------------------------------------------------------
-    // 2. Parabolic Curved Pill Offset (Ticker updates X position dynamically)
+    // 2. Parabolic Curved Pill Offset (desktop only)
     // -------------------------------------------------------------------------
     const wrap = scrollerWrapRef.current;
     const curveTicker = () => {
@@ -262,7 +267,7 @@ export default function Home() {
         const itemCenterY = itemRect.top + itemRect.height / 2;
         const distY = itemCenterY - wrapCenterY;
         const normalizedDist = Math.max(-1, Math.min(1, distY / 280));
-        // Curve inward to the left in the center, straight at top/bottom (never positive, so never cut on right)
+        // Curve inward to the left in the center, straight at top/bottom
         const x = -45 * (1 - normalizedDist * normalizedDist);
         item.style.transform = `translateX(${x}px)`;
       });
@@ -270,13 +275,12 @@ export default function Home() {
     gsap.ticker.add(curveTicker);
 
     // -------------------------------------------------------------------------
-    // 3. Product showcase pin comes before the next pin so ScrollTrigger
-    //    calculates the following section's position after this pin spacing.
+    // 3. Product showcase pin (comes before the next pin so ScrollTrigger
+    //    calculates the following section's position after this pin spacing)
     // -------------------------------------------------------------------------
     let productsCtx = null;
     if (productShowcaseRef.current) {
       productsCtx = gsap.context(() => {
-        gsap.matchMedia().add('(min-width: 769px)', () => {
           const slides = gsap.utils.toArray('.product-showcase-slide');
           if (slides.length < 2) return;
 
@@ -313,7 +317,7 @@ export default function Home() {
           ScrollTrigger.create({
             trigger: productShowcaseRef.current,
             start: 'top top',
-            end: `+=${(slides.length - 1) * 100}%`,
+            end: () => `+=${(slides.length - 1) * window.innerHeight}`,
             pin: true,
             pinSpacing: true,
             anticipatePin: 1,
@@ -328,77 +332,121 @@ export default function Home() {
               showSlide(nextIndex);
             },
           });
-        });
       }, productShowcaseRef);
     }
 
     // -------------------------------------------------------------------------
     // 4. Pinned 3D Stacked Cards on Scroll
+    //    gsap.matchMedia gives the mobile layout its own tighter, calmer
+    //    values (smaller tilt, smaller depth, shorter scroll distance) and
+    //    rebuilds automatically when the screen crosses the breakpoint.
     // -------------------------------------------------------------------------
-    let cardsCtx = null;
+    let cardsMM = null;
     if (cardsSectionRef.current && pinWrapRef.current) {
-      cardsCtx = gsap.context(() => {
-        gsap.matchMedia().add('(min-width: 769px)', () => {
-          const cards = gsap.utils.toArray('.atal_card');
+      const sectionEl = cardsSectionRef.current;
+      const logoEl = rotatingLogoRef.current;
 
-        // Set initial card deck position
-        cards.forEach((card, i) => {
-          gsap.set(card, {
-            xPercent: -50,
-            yPercent: -50,
-            top: '50%',
-            left: '50%',
-            y: i * 14,
-            z: -i * 80,
-            rotateZ: (i % 2 === 0 ? -1 : 1) * 3,
-            rotateX: 0,
-            rotateY: 0,
-            zIndex: cards.length - i,
+      cardsMM = gsap.matchMedia();
+      cardsMM.add(
+        {
+          isMobile: '(max-width: 768px)',
+          isDesktop: '(min-width: 769px)',
+        },
+        (context) => {
+          const { isMobile } = context.conditions;
+          const cards = Array.from(sectionEl.querySelectorAll('.atal_card'));
+          if (!cards.length) return;
+
+          const cfg = isMobile
+            ? {
+                stepY: 10,        // vertical offset per stacked card
+                stepZ: 60,        // depth offset per stacked card
+                tilt: 1.5,        // resting rotation of stacked cards
+                exitRotZ: 8,
+                exitRotX: -8,
+                exitRotY: 8,
+                exitScale: 1.02,
+                exitLift: 1.2,    // how far the card flies up (x viewport height)
+                gap: 1.2,         // timeline gap between cards
+                lengthFactor: 0.9 // scroll distance per card (x viewport height)
+              }
+            : {
+                stepY: 14,
+                stepZ: 80,
+                tilt: 3,
+                exitRotZ: 16,
+                exitRotX: -12,
+                exitRotY: 14,
+                exitScale: 1.05,
+                exitLift: 1.25,
+                gap: 1.35,
+                lengthFactor: 1
+              };
+
+          const scrollLength = () => `+=${cards.length * window.innerHeight * cfg.lengthFactor}`;
+
+          // Initial deck position. top/left come from CSS so the mobile
+          // vertical offset defined in Home.css is respected.
+          cards.forEach((card, i) => {
+            gsap.set(card, {
+              xPercent: -50,
+              yPercent: -50,
+              y: i * cfg.stepY,
+              z: -i * cfg.stepZ,
+              rotateZ: (i % 2 === 0 ? -1 : 1) * cfg.tilt,
+              rotateX: 0,
+              rotateY: 0,
+              scale: 1,
+              autoAlpha: 1,
+              zIndex: cards.length - i,
+            });
           });
-        });
 
-        // Rotating sun petal in background
-        if (rotatingLogoRef.current) {
-          gsap.to(rotatingLogoRef.current, {
-            rotation: 110,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: cardsSectionRef.current,
-              start: 'top top',
-              end: () => `+=${cards.length * 360}`,
-              scrub: 1.8,
-            }
+          // Rotating sun petal in background
+          if (logoEl) {
+            gsap.to(logoEl, {
+              rotation: isMobile ? 90 : 110,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: sectionEl,
+                start: 'top top',
+                end: scrollLength,
+                scrub: 1.8,
+                invalidateOnRefresh: true,
+              },
+            });
+          }
+
+          // Timeline for peeling cards upward
+          const cardTl = gsap.timeline();
+          cards.forEach((card, i) => {
+            cardTl.to(card, {
+              y: () => -window.innerHeight * cfg.exitLift,
+              z: 100,
+              rotateZ: (i % 2 === 0 ? 1 : -1) * cfg.exitRotZ,
+              rotateX: cfg.exitRotX,
+              rotateY: (i % 2 === 0 ? -1 : 1) * cfg.exitRotY,
+              scale: cfg.exitScale,
+              autoAlpha: 0,
+              ease: 'power2.out',
+              duration: 2,
+            }, i * cfg.gap);
           });
-        }
 
-        // Timeline for peeling cards upward
-        const cardTl = gsap.timeline();
-        cards.forEach((card, i) => {
-          cardTl.to(card, {
-            y: -window.innerHeight * 1.25,
-            z: 100,
-            rotateZ: (i % 2 === 0 ? 1 : -1) * 16,
-            rotateX: -12,
-            rotateY: (i % 2 === 0 ? -14 : 14),
-            scale: 1.05,
-            autoAlpha: 0,
-            ease: 'power2.out',
-            duration: 2,
-          }, i * 1.35);
-        });
-
-        ScrollTrigger.create({
-          animation: cardTl,
-          trigger: cardsSectionRef.current,
-          start: 'top top',
-          end: () => `+=${cards.length * 360}`,
-          scrub: 0.6,
-          pin: pinWrapRef.current,
-          pinSpacing: true,
-          anticipatePin: 1,
-        });
-        });
-      }, cardsSectionRef);
+          ScrollTrigger.create({
+            animation: cardTl,
+            trigger: sectionEl,
+            start: 'top top',
+            end: scrollLength,
+            scrub: 0.6,
+            pin: sectionEl,
+            pinSpacing: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          });
+        },
+        sectionEl
+      );
     }
 
     // Reveal each homepage content block as it enters the viewport.
@@ -415,10 +463,6 @@ export default function Home() {
         '.latest-resources-header',
         '.latest-resource-card',
       ].join(', '));
-
-      if (window.matchMedia('(max-width: 768px)').matches) {
-        revealTargets.push(...gsap.utils.toArray('.product-showcase-slide, .atal_card'));
-      }
 
       revealTargets.forEach((element) => {
         gsap.fromTo(element, { autoAlpha: 0, y: 28 }, {
@@ -446,7 +490,7 @@ export default function Home() {
       }
       gsap.ticker.remove(mouseTicker);
       gsap.ticker.remove(curveTicker);
-      if (cardsCtx) cardsCtx.revert();
+      if (cardsMM) cardsMM.revert();
       if (productsCtx) productsCtx.revert();
       if (revealCtx) revealCtx.revert();
     };
@@ -459,7 +503,7 @@ export default function Home() {
   return (
     <div className="home-page-atal-style">
       {/* =========================================================================
-          HERO SECTION: CINEMATIC VIDEO BACKGROUND + CONSULTATION FORM (Screenshot 1)
+          HERO SECTION: CINEMATIC VIDEO BACKGROUND + CONSULTATION FORM
           ========================================================================= */}
       <section className="hero-video-section">
         <div className="hero-video-wrapper">
@@ -471,6 +515,9 @@ export default function Home() {
             playsInline
             poster="/images/hero.png"
           >
+            {/* Mobile portrait video — browsers pick the first matching source */}
+            <source src="/images/herosection_loop_mobile.mp4" type="video/mp4" media="(max-width: 768px)" />
+            {/* Desktop / landscape video */}
             <source src="/images/herosection_loop.mp4" type="video/mp4" />
           </video>
           <div className="hero-video-overlay" />
@@ -490,7 +537,7 @@ export default function Home() {
                 Install high-efficiency solar architectures and claim up to <strong>&#8377;1,08,000 PM Surya Ghar subsidy</strong> or <strong>40% accelerated tax depreciation</strong> with easy EMIs and a free site visit.
               </p>
 
-              {/* Trust Badges Row matching Screenshot 1 */}
+              {/* Trust Badges Row */}
               <div className="hero-trust-badges">
                 <div className="hero-badge-item">
                   <div className="hero-badge-icon">
@@ -541,7 +588,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Consultation Form Card matching Screenshot 1 */}
+            {/* Right Consultation Form Card */}
             <div className="hero-form-wrapper">
               <div className="hero-consultation-card">
                 <h3 className="consultation-card-title">Book a FREE Consultation</h3>
@@ -568,6 +615,7 @@ export default function Home() {
                       name="pinCode"
                       placeholder="PIN Code (6 digits)*" 
                       maxLength={6}
+                      inputMode="numeric"
                       value={consultForm.pinCode}
                       onChange={handleInputChange}
                       required 
@@ -722,7 +770,7 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Right: Curved Parabolic Capsule Scroller with Guaranteed Infinite Loop */}
+            {/* Right: Curved Parabolic Capsule Scroller with Infinite Loop */}
             <div className="atal_solar_usp_feature_area">
               <div className="usp_scroller_wrap" ref={scrollerWrapRef}>
                 <div className="atal_solar_usp_feature_showcase continuous-scroll-track">
@@ -752,23 +800,38 @@ export default function Home() {
           </div>
 
           <div className="product-showcase-stage">
-            {productShowcase.map((product, index) => (
+            {productShowcase.map((product) => (
               <article className="product-showcase-slide" key={product.slug}>
+                {/* Left column: name + feature list */}
+                <div className="ps-col ps-col-left">
+                  <h3 className="ps-title ps-name">{product.name}</h3>
+                  <div className="ps-divider" />
+                  <ul className="ps-card ps-card-features">
+                    {product.points.map((point) => (
+                      <li className="ps-feature" key={point}>
+                        <span className="ps-feature-icon">
+                          <CheckCircle2 size={18} aria-hidden="true" />
+                        </span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Centre: product image with circular halo */}
                 <div className="product-showcase-image-wrap">
                   <div className="product-showcase-image-glow" />
                   <img src={product.image} alt={product.alt} loading="lazy" />
-                  <span className="product-showcase-index">0{index + 1} <i /> 0{productShowcase.length}</span>
                 </div>
-                <div className="product-showcase-copy">
-                  <span className="product-showcase-eyebrow">{product.eyebrow}</span>
-                  <h3>{product.name}</h3>
-                  <p className="product-showcase-description">{product.description}</p>
-                  <ul>
-                    {product.points.map((point) => (
-                      <li key={point}><CheckCircle2 size={17} aria-hidden="true" />{point}</li>
-                    ))}
-                  </ul>
-                  <Link to={`/products/${product.slug}`} className="product-showcase-link">
+
+                {/* Right column: tagline + description + link */}
+                <div className="ps-col ps-col-right">
+                  <span className="ps-title ps-title-sub">{product.eyebrow}</span>
+                  <div className="ps-divider" />
+                  <div className="ps-card ps-card-desc">
+                    <p className="ps-description">{product.description}</p>
+                  </div>
+                  <Link to={`/products/${product.slug}`} className="ps-link">
                     Explore product <ArrowUpRight size={18} aria-hidden="true" />
                   </Link>
                 </div>
@@ -800,7 +863,7 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Card 2: TOPCon Advantage (Warm Solar Amber Card - SolEnergi Brand) */}
+          {/* Card 2: TOPCon Advantage (Warm Solar Amber Card) */}
           <div className="atal_card atal_second_card">
             <div className="atal_card_inside_image">
               <img src="/images/atal_assets/energy.webp" alt="TOPCon Advantage" />
@@ -812,7 +875,7 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Card 3: Best Lifetime Value (Sun Yellow Card - SolEnergi Brand) */}
+          {/* Card 3: Best Lifetime Value (Sun Yellow Card) */}
           <div className="atal_card atal_third_card">
             <div className="atal_card_inside_image">
               <img src="/images/atal_assets/lifecycle.webp" alt="Best Lifetime Value" />
@@ -824,7 +887,7 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Card 4: Zero Carbon (Solar Blue Card - SolEnergi Brand) */}
+          {/* Card 4: Zero Carbon (Solar Blue Card) */}
           <div className="atal_card atal_fourth_card">
             <div className="atal_card_inside_image">
               <img src="/images/atal_assets/carbon.webp" alt="Zero Carbon" />
@@ -919,11 +982,11 @@ export default function Home() {
                       <span className="faq-question-text">{faq.q}</span>
                       <span className="faq-toggle-icon">{isOpen ? '-' : '+'}</span>
                     </button>
-                    {isOpen && (
-                      <div className="faq-answer-panel">
+                    <div className={`faq-answer-panel ${isOpen ? 'open' : ''}`} aria-hidden={!isOpen}>
+                      <div className="faq-answer-inner">
                         <p>{faq.a}</p>
                       </div>
-                    )}
+                    </div>
                   </div>
                 );
               })}
@@ -974,7 +1037,7 @@ export default function Home() {
       </section>
 
       {/* =========================================================================
-          FLOATING WIDGETS: WHATSAPP & BACK TO TOP (Screenshot bottom right)
+          FLOATING WIDGETS: WHATSAPP & BACK TO TOP
           ========================================================================= */}
       <div className="floating-widgets-group">
         <button 

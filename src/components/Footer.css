@@ -22,7 +22,7 @@
 .footer-main-content {
   position: relative;
   z-index: 1;
-  padding: clamp(3rem, 6vw, 5.5rem) 0 clamp(2rem, 4vw, 3rem);
+  padding: clamp(3rem, 6vw, 5.5rem) clamp(1.25rem, 4vw, 2.5rem) clamp(2rem, 4vw, 3rem);
 }
 
 .footer-top-row {
@@ -214,9 +214,29 @@
 }
 
 @media (max-width: 640px) {
+  .footer-main-content {
+    padding: 3rem 1.25rem 2rem;
+  }
+
   .footer-top-row,
   .footer-grid {
     grid-template-columns: 1fr;
+  }
+
+  .footer-top-row,
+  .footer-grid,
+  .footer-col,
+  .footer-newsletter {
+    min-width: 0;
+  }
+
+  .footer-newsletter h2 {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+
+  .footer-col p,
+  .footer-col p a {
+    overflow-wrap: anywhere;
   }
 
   .footer-bottom-row {
