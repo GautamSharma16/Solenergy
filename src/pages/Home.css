@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding: clamp(84px, 10vh, 118px) 0 clamp(42px, 6vh, 72px) 0;
+  padding: clamp(104px, 12vh, 138px) 0 clamp(42px, 6vh, 72px) 0;
   background-color: #0d1b2a;
 }
 
@@ -1342,10 +1342,74 @@
 /* ==========================================================================
    RESPONSIVE MEDIA QUERIES
    ========================================================================== */
+/* Scroll-pinned product showcase */
+.product-showcase-section {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 4.5rem 0;
+  color: #fff;
+  background: radial-gradient(ellipse at 76% 52%, rgba(48, 79, 125, 0.34), transparent 42%), linear-gradient(135deg, #0e1c2d 0%, #172a42 58%, #0e1c2d 100%);
+}
+.product-showcase-section::before,
+.product-showcase-section::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  border: 1px solid rgba(232, 154, 75, 0.12);
+  border-radius: 50%;
+}
+.product-showcase-section::before { width: 560px; height: 560px; right: -180px; top: -280px; }
+.product-showcase-section::after { width: 420px; height: 420px; left: -260px; bottom: -280px; }
+.product-showcase-inner { position: relative; z-index: 1; width: 100%; }
+.product-showcase-heading { max-width: 760px; margin: 0 auto 2rem; text-align: center; }
+.product-showcase-heading > span,
+.product-showcase-eyebrow { color: #f0ad68; font-size: 0.76rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
+.product-showcase-heading h2 { margin: 0.55rem 0; color: #fff; font-size: clamp(2rem, 3.5vw, 3.2rem); line-height: 1.12; letter-spacing: -0.035em; }
+.product-showcase-heading p { margin: 0; color: rgba(245, 247, 250, 0.74); font-size: 1rem; }
+.product-showcase-stage { position: relative; min-height: 430px; }
+.product-showcase-slide { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr); align-items: center; gap: clamp(2rem, 6vw, 6rem); }
+.product-showcase-image-wrap { position: relative; min-width: 0; height: clamp(320px, 34vw, 460px); display: flex; align-items: center; justify-content: center; }
+.product-showcase-image-glow { position: absolute; width: min(90%, 410px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(232, 154, 75, 0.2), rgba(48, 79, 125, 0.16) 52%, transparent 72%); }
+.product-showcase-image-wrap img { position: relative; width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 22px 38px rgba(0, 0, 0, 0.3)); }
+.product-showcase-index { position: absolute; left: 0; bottom: 0.4rem; display: flex; align-items: center; gap: 0.65rem; color: rgba(255, 255, 255, 0.78); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; }
+.product-showcase-index i { width: 54px; height: 1px; background: #e89a4b; }
+.product-showcase-copy { max-width: 470px; }
+.product-showcase-copy h3 { margin: 0.55rem 0 0.9rem; color: #fff; font-size: clamp(2rem, 3.3vw, 3.3rem); line-height: 1.08; letter-spacing: -0.04em; }
+.product-showcase-description { margin: 0 0 1.35rem; color: rgba(245, 247, 250, 0.78); font-size: 1rem; line-height: 1.7; }
+.product-showcase-copy ul { display: grid; gap: 0.85rem; margin: 0 0 1.8rem; padding: 0; list-style: none; }
+.product-showcase-copy li { display: flex; align-items: flex-start; gap: 0.65rem; color: rgba(255, 255, 255, 0.92); font-size: 0.94rem; line-height: 1.45; }
+.product-showcase-copy li svg { flex: 0 0 auto; margin-top: 0.1rem; color: #f0ad68; }
+.product-showcase-link { min-height: 48px; display: inline-flex; align-items: center; gap: 1.4rem; padding: 0.75rem 1.15rem; border: 1px solid rgba(240, 173, 104, 0.65); border-radius: 999px; color: #fff; background: rgba(232, 154, 75, 0.12); font-size: 0.92rem; font-weight: 800; text-decoration: none; transition: background 0.2s ease, transform 0.2s ease; }
+.product-showcase-link:hover { transform: translateY(-2px); background: #d68533; }
+
+@media (max-width: 768px) {
+  .product-showcase-section { min-height: 0; padding: 4rem 0; }
+  .product-showcase-heading { margin-bottom: 1.5rem; }
+  .product-showcase-stage { min-height: 0; display: grid; gap: 1rem; }
+  .product-showcase-slide { position: relative; inset: auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 22px; background: rgba(255, 255, 255, 0.045); }
+  .product-showcase-image-wrap { height: clamp(230px, 65vw, 360px); }
+  .product-showcase-index { left: 0.25rem; bottom: 0; }
+  .product-showcase-copy { max-width: none; }
+}
+
+@media (max-width: 560px) {
+  .product-showcase-heading h2 { font-size: 2rem; }
+  .product-showcase-slide { padding: 0.85rem; }
+}
+
 @media (max-width: 1024px) {
+  .hero-video-section {
+    min-height: 0;
+    align-items: flex-start;
+    padding-top: 112px;
+  }
   .hero-video-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2rem;
   }
   .hero-form-wrapper {
     justify-content: center;
@@ -1373,13 +1437,230 @@
 }
 
 @media (max-width: 768px) {
+  .intro_cards_section {
+    padding: 3.5rem 0;
+  }
+  .intro_two_col {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.25rem;
+  }
+  .home_atal_intro_two_image_area {
+    width: min(100%, 390px);
+    height: clamp(270px, 78vw, 380px);
+    margin: 0 auto;
+  }
+  .home_atal_intro_two_image_area .img-back,
+  .home_atal_intro_two_image_area .img-front {
+    top: 4%;
+    width: 69%;
+    height: 88%;
+  }
+  .home_atal_intro_two_image_area .img-back {
+    left: 1%;
+  }
+  .home_atal_intro_two_image_area .img-front {
+    left: 29%;
+  }
+  .home_atal_intro_content_area h2 {
+    font-size: clamp(2rem, 7vw, 3rem);
+    margin-bottom: 1rem;
+  }
+  .home_atal_intro_content_area p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .atal_story_image_area {
+    width: 100%;
+    margin-left: 0;
+    min-height: 440px;
+    height: auto;
+    padding: 3.5rem 0;
+    align-items: flex-start;
+  }
+  .atal_story_image_area::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(244, 249, 234, 0.94), rgba(244, 249, 234, 0.74));
+  }
+  .story_container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .atal_story_content {
+    padding-bottom: 0;
+  }
+  .story-main-heading {
+    font-size: clamp(1.55rem, 6vw, 2.2rem);
+    line-height: 1.3;
+  }
+  .tpt-80 {
+    width: 100%;
+    margin-left: 0;
+    padding: 3.5rem 0;
+  }
+  .usp_two_col {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+    min-height: 0;
+  }
+  .atal_usp_content_details h2 {
+    font-size: clamp(2rem, 7vw, 2.8rem);
+    margin-bottom: 0.9rem;
+  }
+  .atal_usp_content_details p {
+    font-size: 1rem;
+  }
+  .atal_solar_usp_feature_area {
+    height: 470px;
+    max-width: none;
+  }
+  .usp_scroller_wrap {
+    max-width: none;
+    padding: 0 0.5rem;
+  }
+  .atal_solar_usp_single_feature.usp-pill-item {
+    width: min(100%, 440px);
+    min-height: 68px;
+    padding: 0.75rem 1rem;
+    gap: 0.75rem;
+    transform: translateX(0) !important;
+  }
+  .atal_solar_usp_content_area p {
+    font-size: 0.88rem;
+  }
+  .atal_cards_section {
+    min-height: 0;
+    padding: 2.5rem 1.25rem;
+    overflow: hidden;
+  }
+  .atal_pin_wrap {
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    gap: 1rem;
+    perspective: none;
+    overflow: visible;
+  }
+  .atal_logo_at_center_pin_image {
+    position: absolute;
+    width: min(95vw, 440px);
+    height: min(95vw, 440px);
+  }
+  .atal_card {
+    position: relative;
+    inset: auto;
+    top: auto;
+    left: auto;
+    width: min(100%, 480px);
+    height: auto;
+    min-height: 350px;
+    padding: 2rem 1.35rem;
+    border-radius: 22px;
+    transform: none !important;
+  }
+  .atal_card_inside_image {
+    width: 112px;
+    height: 112px;
+    margin-bottom: 1rem;
+  }
+  .atal_card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+  }
+  .atal_card p {
+    font-size: 0.95rem;
+  }
+  .faq-reference-section {
+    padding: 3.5rem 0;
+  }
+  .faq-reference-header {
+    margin-bottom: 2rem;
+  }
+  .faq-reference-header h2 {
+    font-size: 2rem;
+  }
+  .faq-reference-list {
+    gap: 0.75rem;
+  }
+  .faq-question-btn {
+    min-height: 64px;
+    padding: 1rem;
+    gap: 0.75rem;
+    font-size: 0.98rem;
+  }
+  .faq-answer-panel {
+    padding: 0 1rem 1rem;
+    font-size: 0.9rem;
+  }
+  .latest-resources-section {
+    padding: 3.5rem 0;
+  }
+  .latest-resources-grid {
+    gap: 2rem 1rem;
+  }
+  .latest-resource-body h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.75rem;
+  }
+  .floating-widgets-group {
+    right: 0.85rem;
+    bottom: max(0.85rem, env(safe-area-inset-bottom));
+    gap: 0.45rem;
+  }
+  .whatsapp-float-btn {
+    width: 50px;
+    height: 50px;
+  }
+  .whatsapp-float-icon {
+    width: 46px;
+    height: 46px;
+  }
+  .back-to-top-circle-btn {
+    width: 40px;
+    height: 40px;
+  }
   .hero-video-section {
-    padding-top: 100px;
+    padding: 112px 0 42px;
     min-height: auto;
+  }
+  .hero-video-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+  .hero-content-left,
+  .hero-form-wrapper {
+    min-width: 0;
+  }
+  .hero-headline {
+    font-size: clamp(2rem, 8vw, 3rem);
+    line-height: 1.12;
+    margin-bottom: 1rem;
+  }
+  .hero-headline-break {
+    display: none;
+  }
+  .hero-subheadline {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .hero-consultation-card {
+    max-width: none;
+    border-radius: 20px;
+    padding: 1.4rem;
+  }
+  .consultation-card-title {
+    font-size: 1.35rem;
   }
   .hero-trust-badges {
     gap: 0.85rem;
     margin-left: 0;
+    justify-content: flex-start;
   }
   .hero-badge-item {
     width: 112px;
@@ -1406,10 +1687,89 @@
 }
 
 @media (max-width: 560px) {
+  .home_atal_intro_two_image_area {
+    height: 275px;
+  }
+  .home_atal_intro_two_image_area .img-box {
+    padding: 8px;
+    border-radius: 18px;
+  }
+  .home_atal_intro_two_image_area .img-box img {
+    border-radius: 12px;
+  }
+  .atal_cards_section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .atal_card {
+    min-height: 330px;
+    padding: 1.5rem 1rem;
+  }
+  .faq-reference-header p {
+    max-width: 28ch;
+    margin: 0 auto;
+  }
+  .latest-resources-header h2 {
+    font-size: 2rem;
+    line-height: 1.12;
+  }
+  .latest-resources-view-all {
+    max-width: 100%;
+    padding: 0.65rem 1rem;
+  }
+  .consultation-card-title {
+    font-size: 1.2rem;
+  }
+  .btn-consultation-submit {
+    min-width: 0;
+    padding: 0 0.75rem;
+    font-size: 0.9rem;
+  }
+  .hero-video-section {
+    padding-top: 100px;
+  }
+  .hero-video-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .hero-headline {
+    font-size: clamp(1.85rem, 8.5vw, 2.5rem);
+  }
+  .hero-trust-badges {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem 0.25rem;
+  }
+  .hero-badge-item,
+  .hero-badge-item:nth-child(4) {
+    width: 100%;
+  }
+  .hero-badge-icon,
+  .hero-badge-item:nth-child(4) .hero-badge-icon {
+    max-width: 118px;
+  }
+  .hero-consultation-card {
+    padding: 1.2rem;
+  }
+  .consultation-btn-row {
+    gap: 0.5rem;
+  }
   .latest-resources-grid {
     grid-template-columns: 1fr;
   }
   .latest-resource-image-link {
     aspect-ratio: 1.45 / 0.9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .continuous-scroll-track {
+    animation-duration: 90s;
+  }
+  .atal_card,
+  .product-showcase-slide,
+  .latest-resource-card,
+  .faq-card {
+    scroll-behavior: auto;
   }
 }

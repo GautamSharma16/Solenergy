@@ -22,7 +22,50 @@ import dippLogo from '../assets/DiPP Blue Swoosh Logo (1).png';
 import mnreLogo from '../assets/mnre (1).png';
 import pmSuryaGharLogo from '../assets/PM Surya Ghar Yojana Logo (1).png';
 import upnedaLogo from '../assets/UPNEDA.png';
+import solarTreeImage from '../assets/Futuristic Illuminated Solar Tree (1).png';
+import solarHeaterImage from '../assets/Solar Thermal Heater System (1) (1).png';
+import solarStreetLightImage from '../assets/Solar Street Light Assembly (1).png';
+import solarLanternImage from '../assets/Solar Camping Lantern with Solar Panel (1).png';
 import './Home.css';
+
+const productShowcase = [
+  {
+    slug: 'solar-tree',
+    name: 'Solar Tree',
+    eyebrow: 'Iconic solar architecture',
+    description: 'A landmark vertical solar installation that turns open spaces into clean power hubs while using up to 90% less ground footprint.',
+    points: ['11 kWp landmark installation for MOIL', 'Sculptural, space-saving panel layout', 'Integrated lighting and charging options'],
+    image: solarTreeImage,
+    alt: 'Illuminated solar tree installation',
+  },
+  {
+    slug: 'solar-heater',
+    name: 'Solar Water Heater',
+    eyebrow: 'Reliable solar thermal',
+    description: 'High-capacity solar water heating for hotels, hospitals, institutions and businesses, designed to reduce everyday heating costs.',
+    points: ['Systems up to 25,000 litres', 'Evacuated tube and flat plate options', 'Insulated storage with electric backup'],
+    image: solarHeaterImage,
+    alt: 'Solar water heater system',
+  },
+  {
+    slug: 'solar-street-light',
+    name: 'Solar Street Light',
+    eyebrow: 'Lighting after sunset',
+    description: 'Self-contained solar lighting for roads, campuses and public spaces, with intelligent dusk-to-dawn operation.',
+    points: ['20W to 120W lighting options', 'Long-life lithium battery', 'Motion sensing and smart dimming'],
+    image: solarStreetLightImage,
+    alt: 'Solar street light assembly',
+  },
+  {
+    slug: 'solar-lantern',
+    name: 'Solar Lantern',
+    eyebrow: 'Portable power, anywhere',
+    description: 'Compact solar lighting and charging kits for homes, travel and dependable backup when the grid is unavailable.',
+    points: ['Multiple lighting and SOS modes', 'USB mobile charging', 'Up to 24 hours of runtime'],
+    image: solarLanternImage,
+    alt: 'Portable solar lantern and panel',
+  },
+];
 
 export default function Home() {
   const introImgAreaRef = useRef(null);
@@ -32,6 +75,7 @@ export default function Home() {
   const cardsSectionRef = useRef(null);
   const pinWrapRef = useRef(null);
   const rotatingLogoRef = useRef(null);
+  const productShowcaseRef = useRef(null);
 
   const [openFaq, setOpenFaq] = useState(0);
   const [consultForm, setConsultForm] = useState({
@@ -226,12 +270,76 @@ export default function Home() {
     gsap.ticker.add(curveTicker);
 
     // -------------------------------------------------------------------------
-    // 3. Pinned 3D Stacked Cards on Scroll
+    // 3. Product showcase pin comes before the next pin so ScrollTrigger
+    //    calculates the following section's position after this pin spacing.
+    // -------------------------------------------------------------------------
+    let productsCtx = null;
+    if (productShowcaseRef.current) {
+      productsCtx = gsap.context(() => {
+        gsap.matchMedia().add('(min-width: 769px)', () => {
+          const slides = gsap.utils.toArray('.product-showcase-slide');
+          if (slides.length < 2) return;
+
+          let activeIndex = 0;
+          let slideTransition;
+          gsap.set(slides, { autoAlpha: 0, x: 0 });
+          gsap.set(slides[0], { autoAlpha: 1 });
+
+          const showSlide = (index) => {
+            if (index === activeIndex) return;
+            slideTransition?.kill();
+            const previousIndex = activeIndex;
+            activeIndex = index;
+            gsap.set(slides, { autoAlpha: 0, x: 0 });
+            gsap.set(slides[previousIndex], { autoAlpha: 1 });
+            slideTransition = gsap.timeline()
+              .to(slides[previousIndex], {
+                autoAlpha: 0,
+                x: -18,
+                duration: 0.22,
+                ease: 'power1.in',
+              })
+              .fromTo(slides[activeIndex], {
+                autoAlpha: 0,
+                x: 18,
+              }, {
+                autoAlpha: 1,
+                x: 0,
+                duration: 0.38,
+                ease: 'power2.out',
+              });
+          };
+
+          ScrollTrigger.create({
+            trigger: productShowcaseRef.current,
+            start: 'top top',
+            end: `+=${(slides.length - 1) * 100}%`,
+            pin: true,
+            pinSpacing: true,
+            anticipatePin: 1,
+            snap: {
+              snapTo: 1 / (slides.length - 1),
+              duration: 0.3,
+              delay: 0.04,
+              ease: 'power2.out',
+            },
+            onUpdate: (self) => {
+              const nextIndex = Math.round(self.progress * (slides.length - 1));
+              showSlide(nextIndex);
+            },
+          });
+        });
+      }, productShowcaseRef);
+    }
+
+    // -------------------------------------------------------------------------
+    // 4. Pinned 3D Stacked Cards on Scroll
     // -------------------------------------------------------------------------
     let cardsCtx = null;
     if (cardsSectionRef.current && pinWrapRef.current) {
       cardsCtx = gsap.context(() => {
-        const cards = gsap.utils.toArray('.atal_card');
+        gsap.matchMedia().add('(min-width: 769px)', () => {
+          const cards = gsap.utils.toArray('.atal_card');
 
         // Set initial card deck position
         cards.forEach((card, i) => {
@@ -289,23 +397,46 @@ export default function Home() {
           pinSpacing: true,
           anticipatePin: 1,
         });
+        });
       }, cardsSectionRef);
     }
 
-    // -------------------------------------------------------------------------
-    // 4. Story Text Scroll Reveal
-    // -------------------------------------------------------------------------
-    gsap.from(".atal_story_content p", {
-      y: 40,
-      opacity: 0,
-      duration: 1.1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".atal_story_image_area",
-        start: "top 75%",
-      }
-    });
+    // Reveal each homepage content block as it enters the viewport.
+    const revealCtx = gsap.context(() => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+      const revealTargets = gsap.utils.toArray([
+        '.intro_two_col > *',
+        '.atal_story_content',
+        '.usp_two_col > *',
+        '.product-showcase-heading',
+        '.faq-reference-header',
+        '.faq-card',
+        '.latest-resources-header',
+        '.latest-resource-card',
+      ].join(', '));
+
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        revealTargets.push(...gsap.utils.toArray('.product-showcase-slide, .atal_card'));
+      }
+
+      revealTargets.forEach((element) => {
+        gsap.fromTo(element, { autoAlpha: 0, y: 28 }, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power2.out',
+          clearProps: 'transform',
+          scrollTrigger: {
+            trigger: element,
+            start: 'top 90%',
+            once: true,
+          },
+        });
+      });
+    }, '.home-page-atal-style');
+
+    ScrollTrigger.sort();
     ScrollTrigger.refresh();
 
     return () => {
@@ -316,6 +447,8 @@ export default function Home() {
       gsap.ticker.remove(mouseTicker);
       gsap.ticker.remove(curveTicker);
       if (cardsCtx) cardsCtx.revert();
+      if (productsCtx) productsCtx.revert();
+      if (revealCtx) revealCtx.revert();
     };
   }, []);
 
@@ -348,8 +481,8 @@ export default function Home() {
             {/* Left Content Column */}
             <div className="hero-content-left">
               <h1 className="hero-headline">
-                India's No.1 Choice <br />
-                for Rooftop & Industrial <br />
+                India's No.1 Choice <br className="hero-headline-break" />
+                for Rooftop & Industrial <br className="hero-headline-break" />
                 <span className="hero-highlight-text">Solar Panels</span>
               </h1>
 
@@ -606,6 +739,41 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Scroll through SolEnergi's featured product range */}
+      <section className="product-showcase-section" ref={productShowcaseRef}>
+        <div className="product-showcase-inner container">
+          <div className="product-showcase-heading">
+            <h2>Solar solutions, made for real life.</h2>
+            <p>Explore dependable products engineered for homes, businesses and public spaces.</p>
+          </div>
+
+          <div className="product-showcase-stage">
+            {productShowcase.map((product, index) => (
+              <article className="product-showcase-slide" key={product.slug}>
+                <div className="product-showcase-image-wrap">
+                  <div className="product-showcase-image-glow" />
+                  <img src={product.image} alt={product.alt} loading="lazy" />
+                  <span className="product-showcase-index">0{index + 1} <i /> 0{productShowcase.length}</span>
+                </div>
+                <div className="product-showcase-copy">
+                  <span className="product-showcase-eyebrow">{product.eyebrow}</span>
+                  <h3>{product.name}</h3>
+                  <p className="product-showcase-description">{product.description}</p>
+                  <ul>
+                    {product.points.map((point) => (
+                      <li key={point}><CheckCircle2 size={17} aria-hidden="true" />{point}</li>
+                    ))}
+                  </ul>
+                  <Link to={`/products/${product.slug}`} className="product-showcase-link">
+                    Explore product <ArrowUpRight size={18} aria-hidden="true" />
+                  </Link>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
