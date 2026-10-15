@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { navigationLinks } from '../data/navigation';
 import { companyInfo } from '../data/company';
-import { Menu, X, ChevronDown, Phone, ArrowRight } from 'lucide-react';
+import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import './Header.css';
 
 export default function Header() {
@@ -44,6 +44,18 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   // Close mobile menu on page transition
   useEffect(() => {
@@ -198,20 +210,10 @@ export default function Header() {
           </ul>
 
           <div className="mobile-nav-footer">
-            <div className="mobile-contact-card">
-              <p className="mobile-contact-title">SolEnergi Headquarters</p>
-              <p className="mobile-contact-addr">Plot No – 185, FIE, Patparganj Industrial Area, Delhi – 110092</p>
-              <div className="mobile-contact-btns">
-                <a href={`tel:${companyInfo.contact.phoneMain}`} className="btn btn-secondary">
-                  <Phone size={14} />
-                  <span>Call {companyInfo.contact.phoneDisplay}</span>
-                </a>
-                <Link to="/contact" className="btn btn-primary" onClick={() => setMobileMenuOpen(false)}>
-                  <span>Request Proposal</span>
-                  <ArrowRight size={14} />
-                </Link>
-              </div>
-            </div>
+            <Link to="/contact" className="btn btn-primary" onClick={() => setMobileMenuOpen(false)}>
+              <span>Contact Us</span>
+              <ArrowRight size={14} />
+            </Link>
           </div>
         </div>
       </div>
