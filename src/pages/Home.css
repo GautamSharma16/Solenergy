@@ -50,6 +50,7 @@ body::-webkit-scrollbar,
   left: 0;
   width: 100%;
   height: 100%;
+  min-height: 100%;
   z-index: 1;
   overflow: hidden;
 }
@@ -57,6 +58,7 @@ body::-webkit-scrollbar,
 .hero-video-element {
   width: 100%;
   height: 100%;
+  min-height: 100%;
   object-fit: cover;
   object-position: center;
   transform: scale(1.02);
@@ -1320,7 +1322,7 @@ body::-webkit-scrollbar,
 
 
 /* ==========================================================================
-   Floating Widgets: WhatsApp & Back To Top
+   Floating Widgets: WhatsApp
    ========================================================================== */
 .floating-widgets-group {
   position: fixed;
@@ -1358,27 +1360,6 @@ body::-webkit-scrollbar,
   transform: scale(1.08) translateY(-2px);
   box-shadow: none;
 }
-
-.back-to-top-circle-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background-color: #172a42;
-  color: #ffffff;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(23, 42, 66, 0.25);
-  transition: transform 0.25s ease, background 0.25s ease;
-}
-
-.back-to-top-circle-btn:hover {
-  background-color: #E89A4B;
-  transform: translateY(-2px);
-}
-
 
 /* ==========================================================================
    Scroll-pinned product showcase (three-column spec layout)
@@ -1621,70 +1602,129 @@ body::-webkit-scrollbar,
     padding-right: 1.25rem;
   }
 
+  /* Video never cuts — wrapper always covers full section height on mobile */
+  .hero-video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* tall enough to cover content + form card without cutting */
+    height: max(100%, 100svh);
+    min-height: 100svh;
+  }
+  .hero-video-element {
+    width: 100%;
+    height: 100%;
+    min-height: 100svh;
+    object-fit: cover;
+    object-position: center top;
+  }
+
   /* ---------- Hero ---------- */
   .hero-video-section {
-    /* Full viewport height on mobile — use svh so the address bar doesn't
-       cut content; fall back to 100vh on older browsers. */
     min-height: 100vh;
     min-height: 100svh;
-    /* clamp: scales smoothly between phone sizes */
-    padding: clamp(160px, 28vh, 220px) 0 1.25rem;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: visible;
+    padding: 0;
     align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-video-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: calc(var(--header-height, 74px) + 2.5rem);
+    padding-bottom: 2rem;
   }
   .hero-video-grid {
     grid-template-columns: minmax(0, 1fr);
-    gap: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
   .hero-content-left,
   .hero-form-wrapper {
     min-width: 0;
   }
   .hero-headline {
-    font-size: clamp(2rem, 8vw, 2.7rem);
+    font-size: clamp(1.85rem, 8vw, 2.6rem);
     line-height: 1.12;
-    margin-bottom: 1.35rem;
+    margin-bottom: 0.75rem;
   }
   .hero-headline-break {
     display: none;
   }
   .hero-subheadline {
-    font-size: 1rem;
-    line-height: 1.55;
-    margin-bottom: 2rem;
+    font-size: 0.94rem;
+    line-height: 1.52;
+    margin-bottom: 1.25rem;
   }
   .hero-trust-badges {
-    gap: 0.85rem;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.4rem 0.3rem;
     margin-left: 0;
-    margin-bottom: 2rem;
-    justify-content: flex-start;
+    margin-bottom: 1.1rem;
+    justify-items: center;
   }
   .hero-badge-item {
-    width: 112px;
-    min-height: 76px;
+    width: 100%;
+    min-height: 62px;
   }
   .hero-badge-icon {
-    width: 94px;
-    height: 44px;
+    width: 100%;
+    max-width: 78px;
+    height: 38px;
   }
   .hero-badge-item:nth-child(4) .hero-badge-icon {
-    width: 104px;
+    max-width: 84px;
+  }
+  .hero-badge-text span {
+    font-size: 0.6rem;
   }
   .hero-approval-callout {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+  .hero-approval-callout strong {
+    font-size: 0.9rem;
+  }
+  .hero-approval-callout span {
+    font-size: 0.8rem;
+  }
+  /* Form card: full-width, curved top corners, bleeds to screen edges */
+  .hero-form-wrapper {
+    padding: 0;
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    position: relative;
+    z-index: 3;
   }
   .hero-consultation-card {
+    width: 100%;
     max-width: none;
-    border-radius: 22px;
-    padding: 1.5rem 1.25rem;
-    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.32);
+    border-radius: 28px 28px 28px 28px;
+    padding: 1.5rem 1.25rem 2rem;
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.22);
+    background: #ffffff;
   }
   .consultation-card-title {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
   }
   .consultation-card-sub {
-    margin-bottom: 1.15rem;
+    font-size: 0.86rem;
+    margin-bottom: 1rem;
+  }
+  .consultation-form {
+    gap: 0.75rem;
   }
   /* 16px prevents iOS auto-zoom on focus */
+  .form-input-text,
+  .form-select-field {
+    font-size: 16px;
+  }
   .form-input-text,
   .form-select-field {
     font-size: 16px;
@@ -1692,7 +1732,7 @@ body::-webkit-scrollbar,
 
   /* ---------- Intro ---------- */
   .intro_cards_section {
-    padding: 3.5rem 0 3rem;
+    padding: 2rem 0 1.75rem;
   }
   .intro_two_col {
     grid-template-columns: minmax(0, 1fr);
@@ -1729,9 +1769,9 @@ body::-webkit-scrollbar,
   .atal_story_image_area {
     width: 100%;
     margin-left: 0;
-    min-height: 440px;
+    min-height: 380px;
     height: auto;
-    padding: 3.5rem 0;
+    padding: 2rem 0;
     align-items: flex-start;
   }
   .atal_story_image_area::after {
@@ -1757,7 +1797,7 @@ body::-webkit-scrollbar,
   .tpt-80 {
     width: 100%;
     margin-left: 0;
-    padding: 3.5rem 0;
+    padding: 2rem 0;
   }
   .usp_two_col {
     grid-template-columns: minmax(0, 1fr);
@@ -1965,7 +2005,7 @@ body::-webkit-scrollbar,
 
   /* ---------- FAQ ---------- */
   .faq-reference-section {
-    padding: 3.5rem 0;
+    padding: 2rem 0;
   }
   .faq-reference-header {
     margin-bottom: 2rem;
@@ -1997,7 +2037,7 @@ body::-webkit-scrollbar,
 
   /* ---------- Latest resources ---------- */
   .latest-resources-section {
-    padding: 3.5rem 0;
+    padding: 2rem 0;
   }
   .latest-resources-header {
     align-items: flex-start;
@@ -2036,10 +2076,6 @@ body::-webkit-scrollbar,
     width: 44px;
     height: 44px;
   }
-  .back-to-top-circle-btn {
-    width: 38px;
-    height: 38px;
-  }
 }
 
 
@@ -2048,27 +2084,31 @@ body::-webkit-scrollbar,
    ========================================================================== */
 @media (max-width: 560px) {
   .hero-video-section {
-    /* Keep full height on small phones too */
     min-height: 100vh;
     min-height: 100svh;
-    padding-top: clamp(140px, 25vh, 180px);
-    padding-bottom: 1rem;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+  .hero-video-container {
+    padding-top: calc(var(--header-height, 68px) + 2rem);
   }
   .hero-headline {
-    font-size: clamp(1.85rem, 8.5vw, 2.4rem);
+    font-size: clamp(1.7rem, 8vw, 2.2rem);
   }
   .hero-trust-badges {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem 0.25rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.35rem 0.2rem;
   }
   .hero-badge-item,
   .hero-badge-item:nth-child(4) {
     width: 100%;
+    min-height: 56px;
   }
   .hero-badge-icon,
   .hero-badge-item:nth-child(4) .hero-badge-icon {
-    max-width: 118px;
+    max-width: 68px;
+    height: 34px;
   }
   .hero-consultation-card {
     padding: 1.35rem 1.15rem;
@@ -2128,10 +2168,38 @@ body::-webkit-scrollbar,
     padding: 0.65rem 1rem;
   }
   .latest-resources-grid {
-    grid-template-columns: 1fr;
+    /* Keep 2-column on small phones — matches the reference design */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 0.75rem;
   }
   .latest-resource-image-link {
     aspect-ratio: 1.45 / 0.9;
+  }
+  /* Compact card text so 2-col fits on small screens */
+  .latest-resource-category {
+    font-size: 0.78rem;
+    margin-bottom: 0.4rem;
+  }
+  .latest-resource-body h3 {
+    font-size: 0.82rem;
+    line-height: 1.38;
+    margin-bottom: 0.6rem;
+  }
+  .latest-resource-body time {
+    font-size: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .latest-resource-body {
+    padding-top: 0.65rem;
+  }
+  .latest-resource-read-more {
+    font-size: 0.78rem;
+    padding: 0.5rem 0.75rem;
+    min-height: 36px;
+  }
+  .resource-btn-icon {
+    width: 20px;
+    height: 20px;
   }
 }
 

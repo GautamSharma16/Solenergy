@@ -6,7 +6,7 @@ import {
   ArrowUpRight, 
   Phone, 
   CheckCircle2, 
-  ArrowUp,
+
   ArrowRight
 } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
@@ -1037,18 +1037,9 @@ export default function Home() {
       </section>
 
       {/* =========================================================================
-          FLOATING WIDGETS: WHATSAPP & BACK TO TOP
+          FLOATING WIDGETS: WHATSAPP ONLY (back-to-top is in ScrollToTop component)
           ========================================================================= */}
       <div className="floating-widgets-group">
-        <button 
-          type="button" 
-          className="back-to-top-circle-btn" 
-          onClick={scrollToTop}
-          aria-label="Back to Top"
-        >
-          <ArrowUp size={18} />
-        </button>
-
         <a 
           href="https://wa.me/919310170907?text=Hello%20SolEnergi,%20I%20am%20interested%20in%20solar%20solutions."
           target="_blank" 

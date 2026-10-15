@@ -2,11 +2,12 @@
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background-color: var(--color-white);
-  box-shadow: 0 4px 20px rgba(23, 42, 66, 0.15);
+  background-color: #172a42;
+  color: #ffffff;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +16,9 @@
   opacity: 0;
   visibility: hidden;
   transform: translateY(15px);
-  transition: all var(--transition-smooth);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease,
+    background-color 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 14px rgba(23, 42, 66, 0.25);
 }
 
 .back-to-top-btn.visible {
@@ -25,27 +28,16 @@
 }
 
 .back-to-top-btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(23, 42, 66, 0.22);
-}
-
-.progress-ring {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: rotate(-90deg);
-}
-
-.progress-ring-indicator {
-  transition: stroke-dashoffset 0.1s ease;
+  background-color: #E89A4B;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(232, 154, 75, 0.35);
 }
 
 .arrow-icon {
-  color: var(--color-dark-navy);
-  transition: transform var(--transition-fast);
+  color: #ffffff;
+  transition: transform 0.2s ease;
 }
 
 .back-to-top-btn:hover .arrow-icon {
   transform: translateY(-2px);
-  color: var(--color-primary-orange);
 }

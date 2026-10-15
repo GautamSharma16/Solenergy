@@ -59,7 +59,7 @@ export default function Header() {
   };
 
   return (
-    <header className={`site-header ${scrolled ? 'header-scrolled' : 'header-transparent'} ${!navVisible ? 'header-hidden' : ''}`}>
+    <header className={`site-header ${scrolled ? 'header-scrolled' : 'header-transparent'} ${!navVisible ? 'header-hidden' : ''} ${mobileMenuOpen ? 'mobile-menu-open' : ''}`}>
       <div className="header-container-full">
         {/* Brand Logo - clean without DIPP badge */}
         <Link to="/" className="brand-logo-link" aria-label="SolEnergi Home">
