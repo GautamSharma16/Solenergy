@@ -1627,12 +1627,13 @@ body::-webkit-scrollbar,
        cut content; fall back to 100vh on older browsers. */
     min-height: 100vh;
     min-height: 100svh;
-    padding: 200px 0 1.25rem;
+    /* clamp: scales smoothly between phone sizes */
+    padding: clamp(160px, 28vh, 220px) 0 1.25rem;
     align-items: flex-start;
   }
   .hero-video-grid {
     grid-template-columns: minmax(0, 1fr);
-    gap: 2rem;
+    gap: 2.25rem;
   }
   .hero-content-left,
   .hero-form-wrapper {
@@ -1641,7 +1642,7 @@ body::-webkit-scrollbar,
   .hero-headline {
     font-size: clamp(2rem, 8vw, 2.7rem);
     line-height: 1.12;
-    margin-bottom: 1rem;
+    margin-bottom: 1.35rem;
   }
   .hero-headline-break {
     display: none;
@@ -1649,12 +1650,12 @@ body::-webkit-scrollbar,
   .hero-subheadline {
     font-size: 1rem;
     line-height: 1.55;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
   }
   .hero-trust-badges {
     gap: 0.85rem;
     margin-left: 0;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     justify-content: flex-start;
   }
   .hero-badge-item {
@@ -1667,6 +1668,9 @@ body::-webkit-scrollbar,
   }
   .hero-badge-item:nth-child(4) .hero-badge-icon {
     width: 104px;
+  }
+  .hero-approval-callout {
+    margin-bottom: 0.5rem;
   }
   .hero-consultation-card {
     max-width: none;
@@ -2047,7 +2051,7 @@ body::-webkit-scrollbar,
     /* Keep full height on small phones too */
     min-height: 100vh;
     min-height: 100svh;
-    padding-top: 190px;
+    padding-top: clamp(140px, 25vh, 180px);
     padding-bottom: 1rem;
   }
   .hero-headline {
